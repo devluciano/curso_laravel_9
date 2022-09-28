@@ -47,20 +47,20 @@ class UserController extends Controller
 
         if ($request->image) {
             $data['image'] = $request->image->store('users');
-            // $extension = $request->image->getClientOriginalExtension();
-            // $data['image'] = $request->image->storeAs('users', now() . ".{$extension}");
+            $extension = $request->image->getClientOriginalExtension();
+            $data['image'] = $request->image->storeAs('users', now() . ".{$extension}");
         }
 
         $this->model->create($data);
 
-        // return redirect()->route('users.show', $user->id);
+        return redirect()->route('users.show', $user->id);
         return redirect()->route('users.index');
 
-        // $user = new User;
-        // $user->name = $request->name;
-        // $user->email = $request->email;
-        // $user->password = $request->password;
-        // $user->save();
+        $user = new User;
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->password = $request->password;
+        $user->save();
     }
 
     public function edit($id)
